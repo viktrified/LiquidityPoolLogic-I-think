@@ -6,7 +6,6 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "./lib/Errors.sol";
 import "./lib/Events.sol";
 
-
 contract StakingPool {
     using SafeERC20 for IERC20;
 
