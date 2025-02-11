@@ -27,7 +27,7 @@ contract StakingPool {
     constructor(address _tokenA, address _tokenB) {
         tokenA = _tokenA;
         tokenB = _tokenB;
-        owner = msg.sender;
+        owner = msg.sender; 
     }
     function swap(address _from, uint256 _amount) external {
         if (_from != tokenA && _from != tokenB) revert();
@@ -38,8 +38,8 @@ contract StakingPool {
         IERC20 tokenFrom = IERC20(_from);
         IERC20 tokenTo = IERC20(_to);
         
-        if (tokenFrom.balanceOf(msg.sender) < _amount) revert InsufficientBalance(_from, msg.sender, _amount);
-        if (tokenTo.balanceOf(address(this)) < amountOut) revert InsufficientBalance(_to, address(this), amountOut);
+        if (tokenFrom.balanceOf(msg.sender) < _amount) revert Errors.InsufficientBalance(_from, msg.sender, _amount);
+        if (tokenTo.balanceOf(address(this)) < amountOut) revert Errors.InsufficientBalance(_to, address(this), amountOut);
         
         tokenFrom.safeTransferFrom(msg.sender, address(this), _amount);
         tokenTo.safeTransfer(msg.sender, amountOut);
@@ -70,4 +70,3 @@ contract StakingPool {
         Events.Withdrawn(_token, msg.sender);
     }
 }
-                    
